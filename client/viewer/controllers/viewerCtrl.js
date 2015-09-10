@@ -136,6 +136,7 @@ angular.module("premi.viewer")
             };
 
             $scope.isCurrentCheck = function(){
+                console.log(MTrail.isCurrentSlideChkPnt())
                 return MTrail.isCurrentSlideChkPnt();
             };
 
@@ -193,6 +194,9 @@ angular.module("premi.viewer")
                 $scope.currentSlide = MTrail.getCurrentIndex();
                 if(!MTrail.isTrailEmpty())
                     $scope.goToSlide();
+                if(!$scope.$$phase){
+                    $scope.$apply();
+                }
             });
             $scope.pre_init();
             
