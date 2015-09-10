@@ -166,7 +166,12 @@ angular.module("premi.viewer")
                 $scope.currentSlide = MTrail.getCurrentIndex();
                 if(!MTrail.isTrailEmpty())
                     $scope.goToSlide();
-            }
+            };
+
+            $scope.showCheck = function(){
+                return !MTrail.isSlideInFirstPath();
+            };
+
             signalsCtrl.removeAllSignals();
             signalsCtrl.initSignal('viewer',document,'keydown',function (e) {
                 event.preventDefault();

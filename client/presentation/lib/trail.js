@@ -485,6 +485,11 @@ angular.module("premi")
                         return true;
                     return false; 
                 },
+                isSlideInFirstPath : function(){
+                    if(this.currentChkPnt == 0)
+                        return true;
+                    return false;
+                },
 			})
 
 		}

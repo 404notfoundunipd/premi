@@ -136,7 +136,7 @@ h1{
         <i class="material-icons">skip_next</i>
     </a>
 </div>
-<div ng-if="play_active == true" ng-click="prev()" class="fixed-action-btn" style="bottom: 75.5px; right: 131px; pointer-events:auto;">
+<div ng-if="play_active == true " ng-click="prev()" class="fixed-action-btn" style="bottom: 75.5px; right: 131px; pointer-events:auto;">
     <a class="btn-floating btn-large grey darken-4">
         <i class="material-icons">skip_previous</i>
     </a>
@@ -146,7 +146,7 @@ h1{
         <i class="material-icons">expand_more</i>
     </a>
 </div>
-<div ng-if="play_active == true" ng-click="returnTo()" class="fixed-action-btn" style="bottom: 131px; right: 75.5px; pointer-events:auto;">
+<div ng-if="play_active == true && showCheck() == true" ng-click="returnTo()" class="fixed-action-btn" style="bottom: 131px; right: 75.5px; pointer-events:auto;">
     <a class="btn-floating btn-large grey darken-4">
         <i class="material-icons">flag</i>
     </a>
