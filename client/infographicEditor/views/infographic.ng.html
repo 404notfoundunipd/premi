@@ -197,7 +197,7 @@
 					</a>
 				</li>
 				<li ng-if="showScale">
-					<input class="vertical range_" type="range" min="10" max="10000" value="{{getSelectedZoom()*100}}" orient="vertical" oninput="angular.element(this).scope().changeGOZoom(this.value)">
+					<input class="vertical range_" type="range" min="10" max="20000" value="{{getSelectedZoom()*100}}" orient="vertical" oninput="angular.element(this).scope().changeGOZoom(this.value)">
 				</li>
 				<li ng-click="enableDataZ()" class="editors tooltiped"  data-position="right" data-delay="50" data-tooltip="Set image depth"  ng-class="{'active':showDataZ}">
 					<a href="">

@@ -168,6 +168,7 @@ angular.module("premi.viewer")
             }
             signalsCtrl.removeAllSignals();
             signalsCtrl.initSignal('viewer',document,'keydown',function (e) {
+                event.preventDefault();
                 var keyCode = e.keyCode || e.which,
                     arrow = {
                         left: 37,

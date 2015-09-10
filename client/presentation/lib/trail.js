@@ -188,6 +188,9 @@ angular.module("premi")
                 */
                 initPath : function(Slides, inPath){
                     this.path = inPath;
+                    this.hashSlidePos = {};
+                    this.checkPointHash = {};
+                    this.pipe = [];
                     for (var i = 0; i < Slides.length; i++) {
                         //riempimento hash delle slide correlate alla presentazione 
                         //KEY : Id della slide, VALUE : Posizione nell'array delle slide

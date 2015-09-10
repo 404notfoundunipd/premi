@@ -221,6 +221,7 @@ angular.module("premi.trailMap")
             };
 
             $scope.isFrameInTrail = function(idFrame){
+                console.log(MTrail.isSlideInTrail(idFrame),MTrail.getTrail()[0][0])
                 return MTrail.isSlideInTrail(idFrame);
             };
 

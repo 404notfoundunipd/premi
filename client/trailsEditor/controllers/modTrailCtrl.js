@@ -57,13 +57,13 @@ angular.module("premi.editor.trailsEditor")
             $(document).ready(function(){
                 $('.tooltipped').tooltip({delay: 50});
             });
-            var frames = {};
-            var infoG = Infographics.findOne({'presid':$stateParams.idpres})		//Collezione degli attributi dell'infografica della presentazione
+            var frames          = {};
+            var infoG           = Infographics.findOne({'presid':$stateParams.idpres})		//Collezione degli attributi dell'infografica della presentazione
             var frameCollection = Frames.find({"presid": $stateParams.idpres,'_id':{$in:infoG.framesId}}).fetch();	//Collezione di MongoDB di tutti i frames della presentazione che sono stati inseriti nell'infografica
             var trailCollection = Trails.findOne({"_id" : $stateParams.idtrail});	//Collezione di MongoDB di attributi del trail da modificare
-            var idFrames = [];	//Array di codici identificativi dei frames presenti in FrameCollection
-            var trilly = [[]]; //Matrice vuota, utilizzata come variabile d'appoggio per l'utilizzo del metodo di MTrail initPath per la sua inizializzazione
-            var currentState = 0;
+            var idFrames        = [];	//Array di codici identificativi dei frames presenti in FrameCollection
+            var trilly          = [[]]; //Matrice vuota, utilizzata come variabile d'appoggio per l'utilizzo del metodo di MTrail initPath per la sua inizializzazione
+            var currentState    = 0;
             var states = Object.freeze({
                 noState      : 1,
                 addingAfter  : 2,
@@ -71,16 +71,18 @@ angular.module("premi.editor.trailsEditor")
                 addingIn     : 4,
             });
 
-            $scope.showInSide = false;
+            $scope.showInSide       = false;
             $scope.selectedFrameOut = "";
-            $scope.removingChkPnt = false;
-            var i = 0;
+            $scope.removingChkPnt   = false;
+
             $scope.getFramesId = function(){
                 return idFrames;
             };
+
             $scope.getFrames = function(){
                 return frames;
             };
+
             $scope.getTrail = function(){
                 return trilly;
             };
@@ -89,6 +91,7 @@ angular.module("premi.editor.trailsEditor")
             $scope.save = function(){
                 $meteor.call('updateTrail',$stateParams.idtrail,{trail : TrailFactory.getTrail()});
             };
+            
             var init = function(){
                 trilly = trailCollection.trail;
                 for(var i=0;i<frameCollection.length;i++){
