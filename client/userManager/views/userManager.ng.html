@@ -1,0 +1,66 @@
+<!--  
+    * Name:         userManager.ng.html
+    * Package:      premi/client/userManager/views
+    * Author:       Camborata Marco
+    * Date:         2015-06-04
+
+    * Use:
+    Genera una vista per indirizzare l’utente alle varie opzioni di gestione dell’ac-
+	count (signin, signout, cambio password)
+    
+    * Changes:
+    Version     Date        Who                 Changes             Reason
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    0.2         2015-06-06  Camborata Marco     Aggiunta pulasante di uscita,
+    											modifiche alla grafica
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    0.1         2015-06-04  Camborata Marco     Scrittura del Template
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+    * Created by 404Notfound for Premi - Better than Prezi!
+
+    * Premi is a free software: you can redistribute it and/or modify
+    * it under the terms of the GNU General Public License as published by
+    * the Free Software Foundation, either version 3 of the License, or
+    * (at your option) any later version.
+
+    * This program is distributed in the hope that it will be useful,
+    * but WITHOUT ANY WARRANTY; without even the implied warranty of
+    * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+    * GNU General Public License for more details.
+
+    * You should have received a copy of the GNU General Public License
+    * along with this program. If not, see <http://www.gnu.org/licenses/>
+-->
+
+<header>
+	<nav id="headerPresentationManeger" class="transparent" style="box-shadow: none;">
+		<ul ng-if="currentUser != null" class="right">
+			<li><a class="white-text">{{currentUser.username}}</a></li>
+			<li><a href="/changepassword" class="blue-text text-accent-2"><i class="material-icons small center-align">settings</i></a></li>
+			<li><a href="/signout" class="white-text"><i class="material-icons small center-align">exit_to_app</i></a></li>
+		</ul>
+	</nav>
+</header>
+
+<div style="clear: both;"></div>
+
+<main class="container">
+	<div class="row">
+		<div class="col s12 center-align hide-on-large-only">
+			<img src="imgs/premilogo.png">
+			<h1 class="white-text">Premi<span class="thin" style="font-style:italic;">,<br> better than Prezi!</span></h1>
+		</div>
+	</div>
+	<div class="row valign-wrapper">
+		<div class="col l6 center-align valign hide-on-med-and-down">
+			<img src="imgs/premilogo.png">
+			<h1 class="white-text">Premi<span class="thin" style="font-style:italic;">,<br> better than Prezi!</span></h1>
+		</div>
+		<div class="col l6 m12 s12 valign">
+			<div class="grey lighten-4" style="padding: 30px; padding-right: 30px; padding-left: 30px; margin: 20px;">			
+				<div ui-view></div>
+			</div>
+		</div>
+	</div>
+</main>

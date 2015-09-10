@@ -1,0 +1,181 @@
+.editor.navbar nav{
+	-webkit-box-shadow: none !important;
+	   -moz-box-shadow: none !important;
+			box-shadow: none !important;
+}
+
+.editor.navbar .editor-location a {
+	cursor: default !important;
+}
+
+.editor.navbar .editor-location:hover {
+	background-color: transparent !important;
+}
+
+.editor.navbar.vertical .editors.active,
+.editor.navbar.vertical .editors:hover {
+	background-color: #616161;
+}
+
+.editor.navbar.vertical li:hover {
+	background-color: #424242;
+	cursor:  pointer;
+}
+
+.editor.navbar .dropdown-button {
+	text-transform: capitalize;
+}
+
+.editor.navbar.vertical {
+	position: fixed;
+	left: 0px;
+	top: 0px;
+	width: 64px;
+	height: 100% !important;
+	z-index: 200;
+}
+
+.editor.navbar.vertical nav {
+	height: 100%;
+}
+
+.editor.navbar.vertical nav li {
+	width: 100%;
+	margin: 0;
+}
+
+.editor.navbar.vertical .logo a {
+	padding: 0;
+	padding-top: 9px;
+	height: 64px;
+}
+
+.editor.toolbar.vertical.enabled {
+	width: 330px;
+	overflow: scroll;
+	transition: width 0.25s;
+}
+
+.editor.toolbar.vertical.disabled {
+	width: 0px;
+	overflow: hidden;
+    transition: width 0.25s;
+}
+
+.editor.toolbar.vertical {
+	position: fixed;
+	width: 330px;
+	height: 100%;
+	left: 64px;
+	top: 0;
+	z-index: 200;
+	background-color: #424242;
+}
+
+.editor.toolbar.vertical ul {
+	width: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+.editor.toolbar.vertical ul li {
+	width: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+.editor.toolbar.vertical ul li .frame {
+	height: 192px;
+	width: 256px;
+	margin: auto;
+	margin-right: auto;
+	border: 1px solid #424242;
+	background-color: white;
+	overflow: hidden;
+}
+
+.editor.toolbar.vertical ul li .frame.active ,
+.editor.toolbar.vertical ul li .frame:hover {
+	transform:scale(1.05) translate3d(0px,0px,1000px);
+	perspective:150px;
+	transform-style: preserve-3d;
+	transition-duration: 0.25s;
+	opacity: 1;
+}
+
+.editor.toolbar.vertical ul li .frame {
+	transition-duration: 0.25s;
+	opacity: 0.5;
+}
+
+.editor.toolbar.vertical ul li .frame:hover {
+	border: 1px solid white;
+}
+
+.editor.navbar.vertical.subnav {
+	left: 64px !important;
+	border: 1px solid #424242;
+	z-index: 200;
+}
+
+.editor.navbar.vertical.subnav.enabled {
+	width: 64px !important;
+	transition: width 0.25s;
+}
+
+.editor.navbar.vertical.subnav.disabled {
+	width: 0px !important;
+    transition: width 0.25s;
+    display: none;
+}
+
+#choiseShapeMenu > ul > li {
+	height: 80px;
+	width: 80px;
+}
+
+#choiceShapeMenu .shape {
+	text-align: center;
+	opacity: 1.0;
+}
+
+#choiceShapeMenu .shape:hover {
+	opacity: 0.8;
+}
+
+/*#choiceShapeMenu > ul > li:nth-child(odd) {
+	width: 50%;
+	float:left !important;
+}
+
+#choiceShapeMenu > ul > li:nth-child(even) {
+	width: 50%;
+	float:right !important;
+}
+
+#choiceShapeMenu > ul > li > .shape {
+	position: relative;
+	margin: 0 auto;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}*/
+
+#choiceShape li {
+	display: inline;
+	height: 80px;
+	width: 80px;
+	margin: 5px;
+}
+
+#choiceShape a.shape img {
+	height: 80px;
+	width: 80px;
+}
+
+#choiceShape li:hover {
+	opacity: 0.5;
+}
+
+#dropdownColor > li:hover {
+	opacity: 0.5;
+}

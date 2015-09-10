@@ -1,0 +1,44 @@
+<!--
+	* Name: 		actionDialog.ng.html
+	* Package: 		premi/client/utility/views
+	* Author: 		Enrico De Lazzari
+	* Date: 		2015-08-22
+
+	* Use:
+	direttiva che include la vista actionDialog.ng e permette con il tag html
+	action-dialog di visualizzare un messaggio all'utente che può essere personalizzato 
+	includendo codice html tra il tag di apertura e chiusura della direttiva.
+
+	
+	* Changes:
+	Version		Date		Who 			Changes				Reason
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	0.1			2015-08-22	Enrico De Lazzari  scrittura template
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+	* Created by 404Notfound for Premi - Better than Prezi!
+
+	* Premi is a free software: you can redistribute it and/or modify
+	* it under the terms of the GNU General Public License as published by
+	* the Free Software Foundation, either version 3 of the License, or
+	* (at your option) any later version.
+
+	* This program is distributed in the hope that it will be useful,
+	* but WITHOUT ANY WARRANTY; without even the implied warranty of
+	* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+	* GNU General Public License for more details.
+
+	* You should have received a copy of the GNU General Public License
+	* along with this program. If not, see <http://www.gnu.org/licenses/>
+-->
+
+<div class="container">
+	<div class="row z-depth-1">
+		<div class="col l12 m12 s12" style="padding: 20px;">
+			<p class="black-text" style="font-size:24px; font-weight:300;">{{title}}</p>
+			<ng-transclude></ng-transclude>
+			<a ng-click="actionCallback()" href="" class="waves-effect waves-light btn blue accent-2 white-text">{{actionLabel}}</a>
+			<a ng-click="discardCallback()" href="" class="black-text btn-flat">{{discardLabel}}</a>
+		</div>
+	</div>
+</div>

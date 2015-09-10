@@ -1,0 +1,52 @@
+<!--
+	* Name: 		fallbackMessage.ng.html
+	* Package: 		premi/client/fallback/views
+	* Author: 		Enrico De Lazzari
+	* Date: 		2015-08-22
+
+	* Use:
+	template della vista associato alla direttiva fallbackMessageDirective che permette 
+	di visualizzare il logo e di personalizzare il messaggio che deve essere visualizzato nella navbar.
+	
+	* Changes:
+	Version		Date		Who 			Changes				Reason
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	0.1		2015-08-22	Enrico De Lazzari	scrittura template
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+	* Created by 404Notfound for Premi - Better than Prezi!
+
+	* Premi is a free software: you can redistribute it and/or modify
+	* it under the terms of the GNU General Public License as published by
+	* the Free Software Foundation, either version 3 of the License, or
+	* (at your option) any later version.
+
+	* This program is distributed in the hope that it will be useful,
+	* but WITHOUT ANY WARRANTY; without even the implied warranty of
+	* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+	* GNU General Public License for more details.
+
+	* You should have received a copy of the GNU General Public License
+	* along with this program. If not, see <http://www.gnu.org/licenses/>
+-->
+
+<main class="container">
+	<div class="row">
+		<div class="col s12 center-align hide-on-large-only">
+			<img src="imgs/premilogo.png">
+			<h1 class="black-text">Premi<span class="thin" style="font-style:italic;">,<br> better than Prezi!</span></h1>
+		</div>
+	</div>
+	<div class="row valign-wrapper">
+		<div class="col l6 center-align valign hide-on-med-and-down">
+			<img src="imgs/premilogo.png">
+			<h1 class="black-text">Premi<span class="thin" style="font-style:italic;">,<br> better than Prezi!</span></h1>
+		</div>
+		<div class="col l6 m12 s12 valign">
+			<div class="grey lighten-4 center-align" style="padding: 30px; padding-right: 30px; padding-left: 30px; margin: 20px;">			
+				<h3>{{msg}}</h3>
+				<a href="{{href}}" class="waves-effect waves-light btn blue accent-2 white-text">{{hrefMsg}}</a>
+			</div>
+		</div>
+	</div>
+</main>

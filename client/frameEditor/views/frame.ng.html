@@ -1,0 +1,423 @@
+<!--
+    * Name:         frame.ng.html
+    * Package:      premi/client/frameEditor/views/
+    * Author:       Manuto Monica
+    * Date:         2015-07-02
+
+    * Use:
+   	Template della vista associata allo $scope di frameEditorCtrl. Fornisce tutti gli
+	strumenti necessari alla creazione di un frame
+    
+    * Changes:
+    Version     Date        Who                 Changes             Reason
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    0.11        2015-08-25  De Lazzari Enrico   Aggiunto menu per cambio lvl
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    0.10        2015-08-01  De Lazzari Enrico   modifiche colori shape
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    0.9         2015-07-23  De Lazzari Enrico   corretto errore associato a Interact
+    											su visualizzazione frame
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    0.8         2015-07-20  De Lazzari Enrico   incremento vista
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    0.7         2015-07-17  De Lazzari Enrico  	aggiornamento vista per nuove
+    											funzionalita
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    0.6         2015-07-15  De Lazzari Enrico   incremento vista
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    0.5         2015-07-12  De Lazzari Enrico   incremento vista
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    0.4         2015-07-08  De Lazzari Enrico   incremento vista
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    0.3         2015-07-10  Manuto Monica       modificata la grafica
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    0.2         2015-07-07  Manuto Monica       incremento
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    0.1         2015-07-02  Manuto Monica       inizio template
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+    * Created by 404Notfound for Premi - Better than Prezi!
+
+    * Premi is a free software: you can redistribute it and/or modify
+    * it under the terms of the GNU General Public License as published by
+    * the Free Software Foundation, either version 3 of the License, or
+    * (at your option) any later version.
+
+    * This program is distributed in the hope that it will be useful,
+    * but WITHOUT ANY WARRANTY; without even the implied warranty of
+    * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+    * GNU General Public License for more details.
+
+    * You should have received a copy of the GNU General Public License
+    * along with this program. If not, see <http://www.gnu.org/licenses/>
+-->
+<div ng-class="{'hide':currentState==states.removingFrame}">
+<div class="editor navbar vertical">
+	<nav class="grey darken-4">
+		<div class="nav-wrapper">
+			<ul class="center-align">
+				<li class="logo">
+					<a href="">
+						<img src="/imgs/premilogo_small.png">
+					</a>
+				</li>		
+				<li class="divider"></li>
+				<li class="divider"></li>
+				<li ng-class="{'hide':(getFramesId() == null)}" class="divider"></li>
+				<li class="editors active tooltipped" data-position="right" data-delay="50" data-tooltip="Frame editor">
+					<a href=""><i class="material-icons center-align">picture_in_picture</i></a>
+				</li>
+				<li class="editors tooltipped" data-position="right" data-delay="50" data-tooltip="Infographic editor">
+					<a href="" ng-click="saveFrame();goToState('premi.editor.infographic')"><i class="material-icons center-align">map</i></a>
+				</li>
+				<li class="editors tooltipped" data-position="right" data-delay="50" data-tooltip="Trails editor">
+					<a href="" ng-click="saveFrame();goToState('premi.editor.trails.list')"><i class="material-icons center-align">gesture</i></a>
+				</li>
+				<li class="divider"></li>
+				<li class="divider"></li>
+				<li ng-class="{'hide':(getFramesId() == null)}" ng-click="enableStateMenu('framesListMenu')">
+					<a class="tooltipped" data-position="right" data-delay="50" data-tooltip="Slides list">
+						<i class="material-icons center-align">list</i>
+					</a>
+				</li>
+				<li ng-click="enableStateMenu('GOList')">
+					<a class="tooltipped" data-position="right" data-delay="50" data-tooltip="Slide objects">
+						<i class="material-icons">view_list</i>
+					</a>
+				</li>
+				<li class="divider"></li>
+				<li class="divider"></li>
+				<li ng-class="{'active':currentState==states.frameEditing}"  ng-click="enableStateMenu('frameEditing')" class="editors">
+					<a  class="tooltipped" data-position="right" data-delay="50" data-tooltip="Edit slide">
+						<i class="material-icons center-align">edit</i>
+					</a>
+				</li>
+				<li ng-click="addGObject('frame')">
+					<a class="tooltipped" data-position="right" data-delay="50" data-tooltip="Add slide">
+						<i class="material-icons center-align">library_add</i>
+					</a>
+				</li>	
+				<li ng-class="{'hide':(getFramesId() == null)}" ng-click="removeFrame()">
+					<a class="tooltipped" data-position="right" data-delay="50" data-tooltip="Remove slide">
+						<i class="material-icons center-align">remove</i>
+					</a>
+				</li>
+				<li class="divider"></li>
+				<li class="divider"></li>
+				<li ng-class="{'hide':(getFramesId() == null)}" ng-click="saveFrame()">
+					<a class="tooltipped" data-position="right" data-delay="50" data-tooltip="Save">
+						<i class="material-icons center-align">save</i>
+					</a>
+				</li>
+				<li>
+					<a ng-click="goToState('premi.presentationManager.presentations')" class="tooltipped" data-position="right" data-delay="50" data-tooltip="Exit from editor">
+						<i class="material-icons center-align">exit_to_app</i>
+					</a>
+				</li>
+			</ul>
+		</div>
+	</nav>
+</div>
+<div id="GOList" class="editor toolbar vertical" ng-class="{'enabled' : (currentState == states.goList),'disabled' : (currentState!=states.goList)}">
+	<ul>
+		<li ng-click="enableStateMenu('addGraphicObjectMenu')">
+			<div class="frame" style="border:2px dashed grey;background-color:transparent;margin-top:5px;margin-bottom:10px;">
+				<div style=" position:absolute; height:inherit;width:inherit;"  >
+					<a class="btn-floating btn-large waves-effect waves-light red" style=" z-index:1000;top:calc(50% - 27.25px);left:calc(50% - 27.25px) ;position:relative;"><i class="material-icons">add</i></a>
+				</div>
+			</div>
+		</li>
+		<li ng-repeat="go in getGOContent()" id="added_{{go._id}}" ng-click="selectGO($event,go._id,go.type)" style="position:relative;">
+			<div id="f-{{go._id}}" ng-class="{'active' : (go._id==getSelectedGOId())}" class="frame" >
+				<div ng-if="go.width>=go.height && go.type!='text'" style="zoom:{{25600/go.width}}%; margin-left:auto;">
+			    	<img ng-if="go.type=='image'" id="f-{{go._id}}" class="goimage" src="{{go.src}}" style="height:{{go.height}}px; width:{{go.width}}px;"/>
+					<div ng-if="go.type=='shape'" style="zoom:{{go.zoom}}%;height:{{go.height}}px; width:{{go.width}}px;">
+						<svg id="a-{{go._id}}" style="background-color: transparent;" width="100%" height="100%" viewBox="0 0 48 48" ><path fill="black" d=""/></svg>
+					</div>
+					<div ng-if="go.type=='text'" id="{{go._id}}" class="editable gotext" style="width:auto;height:auto; margin:6px; color:black; font-weight: {{go.weight}}; font-style: {{go.fontStyle}}; text-decoration: {{go.textDecoration}}; font-family: {{go.fontFamily}}; font-size: {{go.sizeFontText}}px;">{{go.text}}</div>
+				</div>
+				<div ng-if="go.width<go.height  && go.type!='text'" style="zoom:{{19200/go.height}}%; margin-left:auto;">
+			    	<img ng-if="go.type=='image'" id="f-{{go._id}}" class="goimage" src="{{go.src}}" style="height:{{go.height}}px; {{go.width}}px;"/>
+					<div ng-if="go.type=='shape'" style="zoom:{{go.zoom}}%;height:{{go.height}}px; width:{{go.width}}px;">
+						<svg id="a-{{go._id}}" style="background-color: transparent;" width="100%" height="100%" viewBox="0 0 48 48" ><path fill="black" d=""/></svg>
+					</div>
+					
+				</div>
+				<div ng-if="go.type=='text'" id="{{go._id}}" class="gotext" style="width:auto;height:auto; margin:6px; color:black; font-weight: {{go.weight}}; font-style: {{go.fontStyle}}; text-decoration: {{go.textDecoration}}; font-family: {{go.fontFamily}}; font-size: {{go.sizeFontText}}px;">{{go.text}}</div>
+			</div>
+			<div style="position:absolute;top:20%;left:80%;">
+				<img src="imgs/up.png" ng-click="decrementLvl($event,go._id)" style="background:trasparent;width:40px;height:40px">
+				<br>
+				<img src="imgs/down.png" ng-click="incrementLvl($event,go._id)" style="background:trasparent;width:40px;height:40px">
+			</div>
+		</li>
+	</ul>
+</div>
+
+<div id="framesList" class="editor toolbar vertical" ng-class="{'enabled' : (currentState == states.framesList),'disabled' : (currentState!=states.framesList)}">
+	<ul>
+		<li ng-click="addGObject('frame')">
+			<div class="frame" style="border:2px dashed grey;background-color:transparent;margin-top:5px;margin-bottom:10px;">
+				<div style=" position:absolute; height:inherit;width:inherit;"  >
+					<a class="btn-floating btn-large waves-effect waves-light red" style=" z-index:1000;top:calc(50% - 27.25px);left:calc(50% - 27.25px) ;position:relative;"><i class="material-icons">library_add</i></a>
+				</div>
+			</div>
+		</li>
+		<li ng-repeat="frame in getFrames()">
+			<div ng-click="selectFrame(getFramesId()[frame]._id)" class="frame" ng-class="{'active' : (getCurrentId() == getFramesId()[frame]._id)}" style="background-color:{{getFramesId()[frame].backgroundColor}};">
+				<div style="background-color:{{getFramesId()[frame].backgroundColor}}; zoom:{{25600/standard_width}}%; position:absolute">
+					<span  ng-repeat="go_f in getFramesId()[frame].content | orderObjectBy:'lvl'" style="height:{{go_f.height}}px; width:{{go_f.width}}px;  transform: translate3d({{go_f.dataX}}px,{{go_f.dataY}}px,{{go_f.dataZ}}px) scale({{go_f.scale}});            -webkit-transform: translate3d({{go_f.dataX}}px,{{go_f.dataY}}px,{{go_f.dataZ}}px) scale({{go_f.scale}}); position:absolute; min-height:20px; min-width:20px; " data-x="{{go_f.dataX}}" data-y="{{go_f.dataY}}" >
+
+	                <img ng-if="go_f.type=='image'" id="f-{{go_f._id}}" class="goimage" src="{{go_f.src}}" style="height:calc(100%); width:calc(100%);"/>
+	                <div ng-if="go_f.type=='shape'" style="zoom:{{go_f.zoom}}%">
+						<svg id="s-{{go_f._id}}" style="background-color: transparent;" width="100%" height="100%" viewBox="0 0 48 48" ><path fill="black" d=""/></svg>
+					</div>
+	                <div ng-if="go_f.type=='text'" id="{{go_f._id}}" class="editable gotext" style="height:{{go_f.height}}em; width:{{go_f.width}}em; margin:6px; color:{{go_f.color}}; font-weight: {{go_f.weight}}; font-style: {{go_f.fontStyle}}; text-decoration: {{go_f.textDecoration}}; font-family: {{go_f.fontFamily}}; font-size: {{go_f.sizeFontText}}px;">{{go_f.text}}</div>
+	            </span>
+            	</div>
+			</div>
+		</li>
+	</ul>
+</div>
+
+<div id="editingFrame_menu" class="editor navbar vertical subnav" ng-class="{'enabled' : (currentState == states.frameEditing),'disabled' : (currentState!=states.frameEditing)}">
+	<nav class="grey darken-4">
+		<div class="nav-wrapper">
+			<ul class="center-align">
+				<li>
+					<a ng-click="enableStateMenu('addGraphicObjectMenu')" class="tooltipped" data-position="right" data-delay="50" data-tooltip="Add object">
+						<i class="material-icons center-align">add</i>
+					</a>
+				</li>				
+				<li ng-class="{'hide':(getFramesId() == null)}" class="tooltipped" data-position="right" data-delay="50" data-tooltip="Change color background">
+					<input type="color" id="html5colorpicker"  onchange="angular.element(this).scope().changeBackgroundColorDropzone(this.value)">
+				</li>
+				<li class="tooltipped" data-position="right" data-delay="50" data-tooltip="Set slide background transparent" ng-click="changeBackgroundColorDropzone('transparent')">
+					<a class='modal-trigger white-text' >
+						<i class="material-icons">crop_free</i>
+					</a>
+				</li>
+			</ul>
+		</div>
+	</nav>
+</div>
+
+<div id="addGrapicObject_menu" class="editor navbar vertical subnav" ng-class="{'enabled' : (currentState == states.addingGO),'disabled' : (currentState!=states.addingGO)}">
+	<nav class="grey darken-4">
+		<div class="nav-wrapper">
+			<ul class="center-align">
+				<li ng-class="{'hide':(getFramesId() == null)}">
+					<a href="" data-position="right" data-delay="50" data-tooltip="Add an image" ng-click="addGObject('image')" class="white-text tooltipped">
+						<i class="material-icons">image</i>
+					</a>
+				</li>
+				<li ng-class="{'hide':(getFramesId() == null)}">
+					<a href="#choiceShape" class="modal-trigger white-text tooltipped" data-position="right" data-delay="50" data-tooltip="Add a shape">
+						<i class="material-icons">nature_people</i>
+					</a>
+				</li>
+				<li ng-class="{'hide':(getFramesId() == null)}">
+					<a href="" ng-click="addGObject('text')" class="white-text tooltipped" data-position="right" data-delay="50" data-tooltip="Add text">
+						<i class="material-icons">edit</i>
+					</a>
+				</li>
+			</ul>
+		</div>
+	</nav>
+</div>
+<style type="text/css">
+.vertical.range_{
+	-webkit-appearance: slider-vertical;
+}</style>
+<div id="editImageMenu" class="editor navbar vertical subnav" ng-class="{'enabled' : (currentState == states.imageEditing),'disabled' : (currentState!=states.imageEditing)}">
+	<nav class="grey darken-4">
+		<div class="nav-wrapper">
+			<ul class="center-align">
+				<li>
+					<a class="tooltipped" ng-if="getSelectedGOId()" ng-click="removeGO()" data-position="right" data-delay="50" data-tooltip="Remove image">
+						<i class="material-icons center-align">delete</i>
+					</a>
+				</li>
+				
+			</ul>
+		</div>
+	</nav>
+</div>
+<div id="editTextMenu" class="editor navbar vertical subnav" ng-class="{'enabled' : (currentState == states.textEditing),'disabled' : (currentState!=states.textEditing)}">
+	<nav class="grey darken-4">
+		<div class="nav-wrapper">
+			<ul class="center-align">
+				<li>
+					<input type="color" id="html5colorpicker" class="tooltipped" data-position="right" data-delay="50" data-tooltip="Set text color" onchange="angular.element(this).scope().setGOColor(this.value)">
+				</li>
+				
+				<li ng-click="resetChange()">
+					<a class='white-text tooltipped' data-position="right" data-delay="50" data-tooltip="Clear format" href='#'>
+						<i class="material-icons">format_clear</i>
+					</a>
+				</li>
+				<li ng-click="dragTextEnable()">
+					<a class='white-text tooltipped' data-position="right" data-delay="50" data-tooltip="Drag text" href='#'>
+						<i class="material-icons">open_with</i>
+					</a>
+				</li>
+				<li ng-click="dragTextDisable()">
+					<a class='white-text tooltipped' data-position="right" data-delay="50" data-tooltip="Edit text" href='#'>
+						<i class="material-icons">description</i>
+					</a>
+				</li>
+				<li>
+					<a class="tooltipped" ng-if="getSelectedGOId()" ng-click="removeGO()" data-position="right" data-delay="50" data-tooltip="Remove Image">
+						<i class="material-icons center-align">delete</i>
+					</a>
+				</li>
+			</ul>
+		</div>
+	</nav>
+</div>
+
+<div id="editShapeMenu" class="editor navbar vertical subnav" ng-class="{'enabled' : (currentState == states.shapeEditing),'disabled' : (currentState!=states.shapeEditing)}">
+	<nav class="grey darken-4">
+		<div class="nav-wrapper">
+			<ul class="center-align">
+				<li>
+					<a class='modal-trigger white-text tooltipped' data-position="right" data-delay="50" data-tooltip="New shape" href='#choiceShape'>
+						<i class="material-icons">attachment</i>
+					</a>
+				</li>
+				<li>
+					<input type="color" id="html5colorpicker" class="tooltipped" data-position="right" data-delay="50" data-tooltip="Change color" onchange="angular.element(this).scope().setGOColor(this.value)">
+				</li>
+				<li>
+					<a class="tooltipped" ng-if="getSelectedGOId()" ng-click="removeGO()" data-position="right" data-delay="50" data-tooltip="Remove Shape">
+						<i class="material-icons center-align">delete</i>
+					</a>
+				</li>
+			</ul>
+		</div>
+	</nav>
+</div>
+
+<div id="choiceShape" class="modal bottom-sheet">
+	<div class="modal-content">
+		<h4>Shapes</h4>
+		<shape-menu callback="addGObject(a,b)" data-class="modal-action modal-close"></shape-menu>
+	</div>
+</div>
+
+<input style="display:none;" id="uploadImageBtnn" type="file" accept="image/*" onchange="angular.element(this).scope().changeImage(this)">
+
+<style type="text/css">
+	.selectedGO {
+		border : 2px dashed ;
+	}
+	.unbordered {
+		border : none;
+	}
+	#dropzone {
+		border:2px solid;
+		border-radius: 30px;
+	}
+</style>
+<style type="text/css">
+html{
+	background-image:url('imgs/18.jpg');
+	background-repeat: repeat;
+}
+#textEdit ul {
+	list-style-type: none;
+	margin:0px;
+	padding: 0px;
+}
+
+#textEdit ul li {
+
+	padding:0px;
+	display: inline-block;
+	position: relative;
+	margin-right: 7px;
+}
+.editor.navbar.orizontal .editors.active, .editor.navbar.orizontal .editors:hover{
+	background-color: #616161;
+}
+</style>
+<div id="textEdit" class="editor navbar orizontal subnav" ng-if="currentState==states.textEditing" style="padding-left:120px;">
+	<nav class="grey darken-4">
+		<div class="nav-wrapper">
+			<ul style="margin-left:20px;">
+			<li><span style="color:white; font-family:{{getTextFamily()}};">Font</span></li>
+		    <li><select class="browser-default" style=" width:150px; font-family:{{getTextFamily()}}; color:black; margin-right:15px;margin-top:10px" onchange="angular.element(this).scope().setFontFamily(this.value)">
+		      <option value="" disabled ng-selected="getTextFamily()==null">Choose font family</option>
+		      <option style="font-family:Arial;color:black;" value="Arial" ng-selected="(getTextFamily()=='Arial')">Arial</option>
+		      <option style="font-family:Times New Roman;color:black" value="Times New Roman" ng-selected="(getTextFamily()=='Times New Roman')">Times New Roman</option>
+		      <option style="font-family:'Open Sans Condensed;color:black' !important"  value="Open Sans Condensed" ng-selected="(getTextFamily()=='Open Sans Condensed')">Open Sans Condensed</option>
+		      <option style="font-family:'Poiret One';color:black" value="Poiret One" ng-selected="(getTextFamily()=='Poiret One')">Poiret One</option>
+		      <option style="font-family:'Oswald';color:black" value="Oswald" ng-selected="(getTextFamily()=='Oswald')">Oswald</option>
+		      <option style="font-family:'Indie Flower'" value="Indie Flower" ng-selected="(getTextFamily()=='Indie Flower')">Indie Flower</option>
+		      <option style="font-family:'Montserrat'" value="Montserrat" ng-selected="(getTextFamily()=='Montserrat')">Montserrat</option>
+		      <option style="font-family:Orbitron" value="Orbitron" ng-selected="(getTextFamily()=='Orbitron')">Orbitron</option>
+		    </select></li>
+		    <li><span style="color:white; font-family:{{getTextFamily()}};">Size</span></li>
+		    <li><select class="browser-default" style="width:100px;color:black;margin-top:10px" onchange="angular.element(this).scope().setFontSize(this.value)">
+		      <option value="" disabled ng-selected="getTextSize()==null">Choose font family</option>
+		      <option style="font-family:{{getTextSize()}}; font-size:10" value="10" ng-selected="getTextFamily()==10">10</option>
+		      <option style="font-family:{{getTextFamily()}}; font-size:15" value="15" ng-selected="getTextSize()==15">15</option>
+		      <option style="font-family:{{getTextFamily()}}; font-size:20" value="20" ng-selected="getTextSize()==20">20</option>
+		      <option style="font-family:{{getTextFamily()}}; font-size:25" value="25" ng-selected="getTextSize()==25">25</option>
+		      <option style="font-family:{{getTextFamily()}}; font-size:30" value="30" ng-selected="getTextSize()==30">30</option>
+		      <option style="font-family:{{getTextFamily()}}; font-size:35" value="35" ng-selected="getTextSize()==35">35</option>
+		      <option style="font-family:{{getTextFamily()}}; font-size:40" value="40" ng-selected="getTextSize()==40">40</option>
+		      <option style="font-family:{{getTextFamily()}}; font-size:45" value="45" ng-selected="getTextSize()==45">45</option>
+		      <option style="font-family:{{getTextFamily()}}; font-size:50" value="50" ng-selected="getTextSize()==50">50</option>
+		      <option style="font-family:{{getTextFamily()}}; font-size:55" value="55" ng-selected="getTextSize()==55">55</option>
+		      <option style="font-family:{{getTextFamily()}}; font-size:60" value="60" ng-selected="getTextSize()==60">60</option>
+		      <option style="font-family:{{getTextFamily()}}; font-size:65" value="65" ng-selected="getTextSize()==65">65</option>
+		      <option style="font-family:{{getTextFamily()}}; font-size:70" value="70" ng-selected="getTextSize()==70">70</option>
+		      <option style="font-family:{{getTextFamily()}}; font-size:75" value="75" ng-selected="getTextSize()==75">75</option>
+		      <option style="font-family:{{getTextFamily()}}; font-size:85" value="85" ng-selected="getTextSize()==85">85</option>
+		      <option style="font-family:{{getTextFamily()}}; font-size:95" value="95" ng-selected="getTextSize()==95">95</option>
+		      <option style="font-family:{{getTextFamily()}}; font-size:105" value="105" ng-selected="getTextSize()==105">105</option>
+		    </select></li>
+		    <li ng-click="changeWeight('a')">
+					<a class='white-text editors tooltipped' data-position="right" data-delay="50" data-tooltip="Bold" href='#' ng-class="{'active':getBold()!=''}" >
+						<i class="material-icons">format_bold</i>
+					</a>
+				</li>
+				<li ng-click="changeFontStyle('a')">
+					<a class='white-text editors tooltipped' data-position="right" data-delay="50" data-tooltip="Italic" href='#' ng-class="{'active':getItalic()!=''}" >
+						<i class="material-icons">format_italic</i>
+					</a>
+				</li>
+				<li ng-click="changeTextDecoration('a')">
+					<a class='white-text editors tooltipped' data-position="right" data-delay="50" data-tooltip="Underlined" href='#' ng-class="{'active':getUnderline()!=''}">
+						<i class="material-icons">format_underlined</i>
+					</a>
+				</li>
+		</ul>
+		</div>
+	</nav>
+</div>
+
+<img id="svgIn" src="" class="hide"/>
+<div id="dropzone" ng-if="getCurrentId()!=null" style="background-color: {{getBackgroundColorDropzone()}}; height:{{standard_height}}px;
+width:{{standard_width}}px;" ng-click="clickDropzone();">
+	<div ng-repeat="go in getGOContent()" id="{{wraPrefix+go._id}}" ng-class="{'selectedGO' : (go._id==getSelectedGOId()), 'unbordered':go.type=='text'}" class="wrapper goimage" style="height:{{go.height+15}}px; width:{{go.width+15}}px;  transform: translate3d({{go.dataX}}px,{{go.dataY}}px,{{go.dataZ}}px) scale({{go.scale}});            -webkit-transform: translate3d({{go.dataX}}px,{{go.dataY}}px,{{go.dataZ}}px) scale({{go.scale}}); position:absolute;" data-x="{{go.dataX}}" data-y="{{go.dataY}}" ng-click="selectGO($event,go._id,go.type)">
+		<img ng-if="go.type=='image'" id="f-{{go._id}}" class="goimage" src="{{go.src}}" style="height:calc(100% - 12px); width:calc(100% - 12px); margin:6px;"/>
+		<div ng-if="go.type=='shape'" style="zoom:{{go.zoom}}%">
+			<svg id="{{go._id}}" style="background-color: transparent;" width="100%" height="100%" viewBox="0 0 48 48" ><path fill="black" d=""/></svg>
+		</div>
+		<div ng-if="go.type=='text' && !(go._id==getSelectedGOId())" id="{{go._id}}" class="editable gotext" style="height:{{go.height}}em; width:{{go.width}}em; margin:6px; color:{{go.color}}; font-weight: {{go.weight}}; font-style: {{go.fontStyle}}; text-decoration: {{go.textDecoration}}; font-family: {{go.fontFamily}}; font-size: {{go.sizeFontText}}px;">{{go.text}}</div>
+		<div ng-if="go.type=='text' && (go._id==getSelectedGOId())">
+			
+			<textarea ng-model="textareaInput" ng-change="changeInputTextarea(textareaInput)" style="transform:translate(0px,0px); position:absolute;width: {{textareaWidth}}em; height: {{textareaHeight}}em; color:{{go.color}}; font-weight: {{go.weight}}; font-style: {{go.fontStyle}}; text-decoration: {{go.textDecoration}}; font-family: {{go.fontFamily}}; font-size: {{go.sizeFontText}}px; resize:none; overflow:hidden;">{{go.text}}</textarea>
+			
+		</div>
+	</div>
+</div>
+</div>
+<div ng-class="{'hide':currentState!=states.removingFrame}">
+	<basic-toolbar active-state="premi.editor.frame"></basic-toolbar>
+	<action-dialog title="Remove frame" action-label="remove" action-callback="confermRemove()" discard-label="Discard" discard-callback="discardRemove()">
+		<p>Are you really sure you want to remove this frame? It could be a checkpoint..</p>
+	</action-dialog>
+</div>

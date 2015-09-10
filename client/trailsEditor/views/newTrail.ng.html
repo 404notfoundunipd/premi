@@ -1,0 +1,45 @@
+<!--
+	* Name: 		newTrail.ng.html
+	* Package: 		premi/client/trailsEditor/views
+	* Author: 		Vegro Federico
+	* Date: 		2015-08-04
+
+	* Use:
+	Template della vista associata allo $scope di newTrailCtrl. Fornisce all’utente
+	i comandi per l’inserimento di un novo trail associato alla presentazione nel
+	database
+
+	
+	* Changes:
+	Version		Date		Who 			Changes				Reason
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	0.2			2015-08-14	Vegro Federico	correzioni
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	0.1			2015-08-04	Vegro Federico	scrittura template
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+	* Created by 404Notfound for Premi - Better than Prezi!
+
+	* Premi is a free software: you can redistribute it and/or modify
+	* it under the terms of the GNU General Public License as published by
+	* the Free Software Foundation, either version 3 of the License, or
+	* (at your option) any later version.
+
+	* This program is distributed in the hope that it will be useful,
+	* but WITHOUT ANY WARRANTY; without even the implied warranty of
+	* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+	* GNU General Public License for more details.
+
+	* You should have received a copy of the GNU General Public License
+	* along with this program. If not, see <http://www.gnu.org/licenses/>
+-->
+
+<basic-toolbar active-state="premi.editor.trails"></basic-toolbar>
+
+<action-dialog title="New trail" action-label="Save" action-callback="save()" discard-label="Discard" discard-callback="discard()">
+	<div class="input-field">
+		<i class="mdi-editor-mode-edit prefix"></i>
+		<input id="title" type="text" ng-model="data.title">
+		<label for="title">Title</label>
+	</div>
+</action-dialog>
